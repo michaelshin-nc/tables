@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {updateTable} from "../redux/actions/actions";
 import {connect} from "react-redux";
 import { validateAndUpdateWidth, validateInputs } from '../util/validate';
+import {setCookie} from "../util/cookie";
 
 // Styled
 const Button = styled.button`
@@ -46,7 +47,7 @@ const TableInput = ({table, tableIndex, updateTable}) => {
         if(validateInputs({ numberStartN, numberIncreaseByX, numberEndM }) !== 'pass') {
             alert(validateInputs({ numberStartN, numberIncreaseByX, numberEndM }));
         } else {
-
+            setCookie('threeTables', JSON.stringify(newTable), 3);
             updateTable(newTable)
         }
     };
@@ -55,6 +56,7 @@ const TableInput = ({table, tableIndex, updateTable}) => {
         const prevIsConfigurationOpen = table[index].isConfigurationOpen;
         const newTable = [...table];
         newTable[index].isConfigurationOpen = !prevIsConfigurationOpen;
+        setCookie('threeTables', JSON.stringify(newTable), 3);
         updateTable(newTable);
     };
 

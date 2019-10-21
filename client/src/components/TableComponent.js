@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TableInput from './TableInput';
 import {updateTable} from "../redux/actions/actions";
 import {connect} from "react-redux";
+import {setCookie} from "../util/cookie";
 
 // Styled
 const padding = '.5rem';
@@ -76,6 +77,7 @@ const TableComponent = ({table, tableIndex, updateTable}) => {
         const prevIsConfigurationOpen = table[index].isConfigurationOpen;
         const newTable = [...table];
         newTable[index].isConfigurationOpen = !prevIsConfigurationOpen;
+        setCookie('threeTables', JSON.stringify(newTable), 3);
         updateTable(newTable);
     };
 
